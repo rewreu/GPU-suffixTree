@@ -28,7 +28,8 @@ int main(int argc, char** argv){
 		int deviceID = 0;
 		cudaDeviceProp deviceProp;
 		char* deviceName = NULL;
-		int numberOfChildren = 1009; // use a large prime number
+//		int numberOfChildren = 1009; // use a large prime number
+		cout<<"testing number of children"<<NUM_CHILDREN<<endl;
 
 		//check that CUDA is supported and get the name of the device
 		CUDAErrorCheck(cudaSetDevice(deviceID));
@@ -83,7 +84,7 @@ int main(int argc, char** argv){
 		int numSuffixes; //number of suffixes
 		//parseStrings(strings,text,indices,suffixes,totalLength,numStrings,numSuffixes);
         preParseStrings(strings,text,indices,
-                suffixes,totalLength,numStrings,numSuffixes,numberOfChildren);
+                suffixes,totalLength,numStrings,numSuffixes,NUM_CHILDREN);
 		//print program properties
 		cout << "Device: " << deviceName;
 		cout << ", bsize: " << bsize << ", bcount: " << bcount;
@@ -92,6 +93,10 @@ int main(int argc, char** argv){
 		cout << ", Number of strings: " << numStrings;
 		cout << ", Number of suffixes: " << numSuffixes;
 		cout << ", total length: " << totalLength << endl;
+		cout << "text is: ";
+		for(int i=0;i<totalLength;i++){
+			cout<<text[i]<<" ";
+		}
 
 		// test char16_t
 //        char16_t* testChar;

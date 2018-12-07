@@ -3,7 +3,7 @@
 
 __device__ int getEndOfSuffix(int start, char16_t* text){
 	int i = start;
-	while(text[i] != '$') i++;
+	while(!(text[i] == '$' || text[i+2] == '#')) i++;
 	return i+1;
 }
 
@@ -21,7 +21,8 @@ __global__ void constructSuffixTree(Node* root,
 			int end = getEndOfSuffix(start,text);
 
 			char16_t c = text[start];
-			char16_t index = charToIndex(c);
+//			char16_t index = charToIndex(c);
+			char16_t index = c;
 			Node** address = &(root->children[index]);
 			Node* child = *address;
 			if(child == NULL){
@@ -71,7 +72,7 @@ char16_t* impl2(char16_t* text, int* indices, int* suffixes,
 	CUDAErrorCheck(cudaDeviceSynchronize());
 
 	cout << "impl2 suffixPerThread running time: " << timer.get() << " ms" << endl;
-//	printTree<<<1,1>>>(d_root,d_text);
+	printTree<<<1,1>>>(d_root,d_text);
 	char16_t* output = NULL;
 	int size = getSerialSuffixTree(d_root,d_text,&output);
 	printf("Output size: %d\n",size);

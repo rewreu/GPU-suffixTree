@@ -8,8 +8,10 @@ __device__ char charToIndex(char c){
 		index = c - '0' + 26;
 	else if (c == '#') index = 36;
 	else if (c == '$') index = 37;
-	return index; 
+	return index;
 }
+
+
 
 /*__device__ char indexToChar(char index){
 	return index;

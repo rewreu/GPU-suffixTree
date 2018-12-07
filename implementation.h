@@ -8,7 +8,7 @@
 #include <uchar.h>
 using namespace std;
 
-#define NUM_CHILDREN 38
+#define NUM_CHILDREN 1009
 typedef unsigned long long int address_type;
 
 //Node struct
@@ -52,8 +52,8 @@ __device__ Node* createNode(int start, int end);
 __device__ bool splitNode(Node** address, int position, char16_t* text);
 __device__ void combineNode(Node** address, struct Node* node2, char16_t* text);
 __device__ void addNode(Node** address, Node* node2, char16_t* text);
-__device__ void printNode(Node* node, char* text);
-__global__ void printTree(Node* root, char* text);
+__device__ void printNode(Node* node, char16_t* text);
+__global__ void printTree(Node* root, char16_t * text);
 // count characters
 __host__ __device__ void countChar(Node* root, int* numChar);
 // pre-order traversal
